@@ -1,4 +1,3 @@
-
 package Jama;
 
 import Jama.LUDecomposition;
@@ -85,6 +84,13 @@ public class Calibration {
         double[][] b = { {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {-M1.get(0,3)}, {-M1.get(1,3)}, {-M1.get(2,3)}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {0}, {-M2.get(0,3)}, {-M2.get(1,3)}, {-M2.get(2,3)}};
         Matrix B = new Matrix(b);
 
+
+
+        System.out.println("size A: " + A.getRowDimension()+ "x" + A.getColumnDimension());
+        System.out.println("size B: " + B.getRowDimension()+ "x" + B.getColumnDimension());
+
+        A.inverse();
+        System.out.println("rank a: " + A.rank());
         Matrix W = A.solve(B);
 
         double[][] x = {{W.get(0,0), W.get(3,0), W.get(6,0), W.get(9,0)},
@@ -103,16 +109,18 @@ public class Calibration {
 
         System.out.println("W = ");
         for(int i = 0; i < 24; i++){
-                System.out.println(W.getArray()[i][0] + " ");
+            System.out.println(W.get(i,0) + " ");
         }
         System.out.println("\n");
         System.out.println("X = ");
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
-                System.out.println(X.getArray()[i][j] + " ");
+                System.out.print(X.getArray()[i][j] + " ");
             }
             System.out.println("\n");
         }
+
+        /*
         System.out.println("\n");
         System.out.println("Y = ");
         for(int i = 0; i < 4; i++){
@@ -121,6 +129,25 @@ public class Calibration {
             }
             System.out.println("\n");
         }
+
+        System.out.println("\n");
+        System.out.println("A = ");
+        for(int i = 0; i < 24; i++){
+            for(int j = 0; j < 24; j++){
+                System.out.print(A.getArray()[i][j]+ " ");
+            }
+            System.out.println("\n");
+        }
+
+
+        System.out.println("\n");
+        System.out.println("B = ");
+
+        for(int j = 0; j < 24; j++){
+            System.out.println(B.getArray()[j][0]+ " ");
+        }
+        System.out.println("\n");
+*/
 
     }
 
