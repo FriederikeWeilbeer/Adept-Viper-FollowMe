@@ -1,6 +1,7 @@
 package Jama;
 
 import java.util.ArrayList;
+import Jama.Matrix;
 
 public class Calib {
 
@@ -57,20 +58,23 @@ public class Calib {
         }
 
         Matrix B = new Matrix(Bs.size()*12, 1);
+        counter = 0;
         for(int b = 0; b < Bs.size(); b++){
             for(int i = 0; i < 12; i++){
-                B.set((b+1)*i, 0,Bs.get(b).get(i,0));
+                B.set(counter+i, 0,Bs.get(b).get(i,0));
                 //System.out.println(B.get((b+1)*i, 0));
             }
+            counter = counter + 12;
         }
 
         System.out.println("size A: " + A.getRowDimension()+ "x" + A.getColumnDimension());
         System.out.println("size B: " + B.getRowDimension()+ "x" + B.getColumnDimension());
         System.out.println("rank a: " + A.rank());
+        System.out.println("B(0) = " + B.get(0,0) );
         Matrix W = A.solve(B);
 
-        for(int i = 0; i<24; i++){
-            System.out.println(W.get(i,0));
+        for(int i = 0; i < 24; i++){
+            System.out.println(W.get(i,0) + " ");
         }
 
         double[][] x = {{W.get(0,0), W.get(3,0), W.get(6,0), W.get(9,0)},
@@ -85,7 +89,7 @@ public class Calib {
 
         Matrix X = new Matrix(x);
         Matrix Y = new Matrix(y);
-/*
+
         System.out.println("X = ");
         for(int i = 0; i < 4; i++){
             for(int j = 0; j < 4; j++){
@@ -101,7 +105,7 @@ public class Calib {
             }
             System.out.println("\n");
         }
-*/
+
 
         ArrayList<Matrix> XY = new ArrayList<>();
         return XY;
