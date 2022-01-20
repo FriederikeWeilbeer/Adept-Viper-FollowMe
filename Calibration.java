@@ -88,8 +88,7 @@ public class Calibration {
 
         System.out.println("size A: " + A.getRowDimension()+ "x" + A.getColumnDimension());
         System.out.println("size B: " + B.getRowDimension()+ "x" + B.getColumnDimension());
-
-        A.inverse();
+        
         System.out.println("rank a: " + A.rank());
         Matrix W = A.solve(B);
 
